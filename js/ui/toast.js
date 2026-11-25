@@ -1,5 +1,5 @@
 /* =============================================================
-   js/ui/toast.js  |  Owner: Member 1 (UI / UX)
+   js/ui/toast.js  |  Owner: Nowshin (UI / UX)
    Small helper that shows a temporary notification message.
    ============================================================= */
 

@@ -1,5 +1,5 @@
 /* =============================================================
-   js/features/search.js  |  Owner: Member 3
+   js/features/search.js  |  Owner: Amdad
    City search with live suggestions, form submit,
    default city shortcut and "Near Me" geolocation.
    ============================================================= */

@@ -1,5 +1,5 @@
 /* =============================================================
-   js/features/forecast.js  |  Owner: Member 3
+   js/features/forecast.js  |  Owner: Amdad
    Draws the 24-hour forecast and the 10-day forecast list.
    ============================================================= */
 

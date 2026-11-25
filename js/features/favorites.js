@@ -1,5 +1,5 @@
 /* =============================================================
-   js/features/favorites.js  |  Owner: Member 3
+   js/features/favorites.js  |  Owner: Amdad
    Save, remove and display favorite cities (localStorage).
    ============================================================= */
 

@@ -1,5 +1,5 @@
 /* =============================================================
-   js/config/constants.js  |  Owner: Member 2 (configuration)
+   js/config/constants.js  |  Owner: Tasrif (configuration)
    API endpoints, weather-code table and shared app state.
    Loaded FIRST so every other script can use these globals.
    ============================================================= */

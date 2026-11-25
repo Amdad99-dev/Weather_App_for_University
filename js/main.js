@@ -1,5 +1,5 @@
 /* =============================================================
-   js/main.js  |  Owner: Member 1 (entry point)
+   js/main.js  |  Owner: Nowshin (entry point)
    Starts the application once the page has finished loading.
    Must be the LAST script loaded in index.html.
    ============================================================= */

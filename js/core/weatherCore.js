@@ -1,5 +1,5 @@
 /* =============================================================
-   js/core/weatherCore.js  |  Owner: Member 2 (API integration)
+   js/core/weatherCore.js  |  Owner: Tasrif (API integration)
    Calls the Open-Meteo Forecast API, reads the JSON, shows the
    current weather, key metrics and changes the background theme.
    Loaded after config/constants.js and utils/weatherUtils.js.

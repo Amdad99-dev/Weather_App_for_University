@@ -1,5 +1,5 @@
 /* =============================================================
-   js/utils/weatherUtils.js  |  Owner: Member 2 (utilities)
+   js/utils/weatherUtils.js  |  Owner: Tasrif (utilities)
    Pure helper functions: temperature unit conversion, wind
    direction, UV description, time formatting, safe DOM write.
    ============================================================= */
