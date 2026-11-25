@@ -70,9 +70,9 @@ skypulse-weather-dashboard/
 |---|---|---|
 | Member | Role | Files |
 |--------|------|-------|
-| Member 1 | UI design, HTML/CSS, testing, documentation | `index.html`, `css/*`, `js/main.js`, `js/ui/toast.js`, `README.md` |
-| Member 2 | API integration, current weather, metrics, themes, unit conversion | `js/config/constants.js`, `js/utils/weatherUtils.js`, `js/core/weatherCore.js` |
-| Member 3 | Search, geolocation, favorites, hourly and 10-day forecasts | `js/features/search.js`, `js/features/favorites.js`, `js/features/forecast.js` |
+| Nowshin | UI design, HTML/CSS, testing, documentation | `index.html`, `css/*`, `js/main.js`, `js/ui/toast.js`, `README.md` |
+| Tasrif | API integration, current weather, metrics, themes, unit conversion | `js/config/constants.js`, `js/utils/weatherUtils.js`, `js/core/weatherCore.js` |
+| Amdad | Search, geolocation, favorites, hourly and 10-day forecasts | `js/features/search.js`, `js/features/favorites.js`, `js/features/forecast.js` |
 
 ## 🚀 Installation & Run
 
