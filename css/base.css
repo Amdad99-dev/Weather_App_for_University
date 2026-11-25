@@ -1,0 +1,109 @@
+/* =============================================================
+   base.css  |  Owner: Member 1 (UI design)
+   Reset, body, weather themes, icon sizes, glass effect,
+   helper utilities and text colour classes.
+   ============================================================= */
+
+/* ---------- 1. Reset ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ---------- 2. Body ---------- */
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+    color: #fff;
+    overflow-x: hidden;
+    transition: background 1.2s ease-in-out;   /* smooth theme change */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* ---------- 3. Weather themes (class is switched by JS) ---------- */
+.theme-default       { background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a); }
+.theme-clear-day     { background: linear-gradient(135deg, #1e3c72, #2a5298, #6dd5ed); }
+.theme-clear-night   { background: linear-gradient(135deg, #090a0f, #111e38, #1a233a); }
+.theme-clouds-day    { background: linear-gradient(135deg, #3a6073, #3a7bd5, #6c7a89); }
+.theme-clouds-night  { background: linear-gradient(135deg, #1f1c2c, #302b63, #24243e); }
+.theme-rain          { background: linear-gradient(135deg, #203a43, #2c5364, #0f2027); }
+.theme-snow          { background: linear-gradient(135deg, #506f86, #8ca8be, #abb8c4); }
+.theme-thunderstorm  { background: linear-gradient(135deg, #141e30, #243b55, #11002c); }
+
+/* ---------- 4. Icon sizes ---------- */
+.icon-xs  { width: 0.75rem;  height: 0.75rem; }
+.icon-sm  { width: 0.875rem; height: 0.875rem; color: #34d399; }
+.icon-sm1 { width: 0.875rem; height: 0.875rem; color: #38bdf8; }
+.icon-md  { width: 1rem;     height: 1rem; }
+.icon-lg  { width: 1.5rem;   height: 1.5rem; cursor: pointer; }
+.icon-lg1 { width: 1.25rem;  height: 1.25rem; color: #67e8f9; }
+.icon-xl  { width: 1.5rem;   height: 1.5rem; color: #67e8f9; }
+.icon-2xl { width: 1.75rem;  height: 1.75rem; }
+
+.icon-md,
+.icon-lg { color: #67e8f9; }
+
+.icon-weather { width: 4rem; height: 4rem; }
+
+@media (min-width: 768px) {
+    .icon-weather { width: 5rem; height: 5rem; }
+}
+
+/* ---------- 5. Glass effect ---------- */
+.glass-card {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+}
+
+.glass-card-subtle {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ---------- 6. Utilities ---------- */
+.hidden { display: none; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Remove default browser styling from form controls */
+input {
+    font: inherit;
+    color: inherit;
+    margin: 0;
+    background: none;
+    border: none;
+}
+
+button:focus,
+input:focus { outline: none; }
+
+/* ---------- 7. Text colours (kept last so they override icon colours) ---------- */
+.txt-white           { color: #ffffff; }
+.txt-slate-100       { color: #f1f5f9; }
+.txt-slate-200       { color: #e2e8f0; }
+.txt-slate-300       { color: #cbd5e1; }
+.txt-slate-400       { color: #94a3b8; }
+.txt-slate-300-soft  { color: rgba(203, 213, 225, 0.8); }
+.txt-slate-300-faint { color: rgba(203, 213, 225, 0.7); }
+.txt-cyan-200        { color: #a5f3fc; }
+.txt-cyan-300        { color: #67e8f9; }
+.txt-blue-300        { color: #93c5fd; }
+.txt-teal-300        { color: #5eead4; }
+.txt-amber-300       { color: #fcd34d; }
+.txt-indigo-300      { color: #a5b4fc; }
+.txt-purple-300      { color: #d8b4fe; }
+.txt-orange-300      { color: #fdba74; }
+.txt-emerald-400     { color: #34d399; }
+.txt-sky-400         { color: #38bdf8; }

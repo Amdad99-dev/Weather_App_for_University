@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather App</title>
+
+  <!-- Stylesheets: order matters (base -> layout -> components) -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+
+  <!-- Icon library (Lucide) -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body class="theme-default">
+  <!-- ================= HEADER ================= -->
+  <header class="header">
+    <!-- Brand: clicking returns to the default city -->
+    <div class="brand" onclick="loadCoxBazar()">
+      <div class="brand-logo glass-card">
+        <i data-lucide="cloud-sun" class="icon-2xl"></i>
+      </div>
+      <div class="weather-info">
+        <h1 class="brand-title">SkyPulse</h1>
+        <p class="brand-subtitle">LIVE ATMOSPHERIC DATA</p>
+      </div>
+    </div>
+
+    <!-- Search box, "Near Me" button and suggestion dropdown -->
+    <div class="search-area">
+      <form class="search-form" id="searchForm" onsubmit="searchWeather(event)">
+        <i data-lucide="search" class="search-icon icon-lg"></i>
+        <input type="text" id="searchInput" class="search-input"
+          placeholder="Search city (e.g., Cox's Bazar, Dhaka, London)..." />
+
+        <button type="button" id="geoBtn" class="glass-card" title="Use Current Location">
+          <i data-lucide="navigation" class="icon-sm"></i>
+          <span class="geo-text">Near Me</span>
+        </button>
+      </form>
+      <div id="searchResults" class="search-results glass-card no-scrollbar hidden"></div>
+    </div>
+
+    <!-- Temperature unit switch -->
+    <div class="unit-option glass-card">
+      <button id="unitC" class="unit-btn is-active" onclick="setUnit('C')">°C</button>
+      <button id="unitF" class="unit-btn" onclick="setUnit('F')">°F</button>
+    </div>
+  </header>
+
+  <!-- ================= FAVORITES BAR ================= -->
+  <div class="favorite-bar no-scrollbar">
+    <div id="favoritesContainer" class="favorites-row no-scrollbar">-----</div>
+  </div>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="dashboard">
+    <!-- Left column: current weather, hourly forecast, metrics -->
+    <section class="left-side">
+      <div class="current-card glass-card">
+        <div class="card-header">
+          <div>
+            <div class="city-row">
+              <h2 id="cityName" class="city-name">---</h2>
+              <button class="day-btn" id="favBtn" onclick="toggleFavorite()">
+                <i data-lucide="star" id="favIcon" class="icon-lg"></i>
+              </button>
+            </div>
+            <p id="currentDate" class="current-date">----</p>
+          </div>
+          <span id="weatherBadge" class="badge">--</span>
+        </div>
+
+        <div class="temp-row">
+          <div class="temp-main">
+            <span id="currentTemp" class="current-temp">--</span>
+            <span id="tempDisplay" class="tempDisplay">°C</span>
+          </div>
+          <div class="condition">
+            <div id="weatherIconContainer" class="weather-iconwrap txt-amber-300">
+              <i data-lucide="sun" class="icon-weather"></i>
+              <p id="weatherDesc" class="weather-desc">Loading....</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-foot">
+          <div class="foot-group">
+            <!-- FIX: unit symbol is now written by JS so it follows the °C/°F switch -->
+            <span class="foot-label">
+              <i data-lucide="arrow-up" class="icon-sm"></i>
+              High: <strong id="highTemp">--°C</strong>
+            </span>
+            <span class="foot-label">
+              <i data-lucide="arrow-down" class="icon-sm1"></i>
+              Low: <strong id="lowTemp">--°C</strong>
+            </span>
+          </div>
+          <div class="txt-slate">
+            Feels like <strong id="feelsLike">--°C</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- 24-hour forecast -->
+      <div class="pannel glass-card">
+        <div class="pannel-head">
+          <h3 class="pannel-title">
+            <i data-lucide="clock" class="icon-md txt-cyan-300"></i> 24-Hours Forecast
+          </h3>
+          <span class="pannel-signal">Hourly Trends</span>
+        </div>
+        <div class="hourly-scrool" id="hourlyforecastContainer">
+          <div class="loading-text">Loading hourly timeline...</div>
+        </div>
+      </div>
+
+      <!-- Key weather metrics -->
+      <div class="metric-grid">
+        <div class="metric-tile glass-card">
+          <div class="metric-head">
+            <span class="metric-label">Humidity</span>
+            <i data-lucide="droplets" class="icon-md txt-blue-300"></i>
+          </div>
+          <p id="metricHumidity" class="metric-value">--%</p>
+          <span id="humidityStatus" class="metric-note txt-slate-300">--</span>
+        </div>
+
+        <div class="metric-tile glass-card">
+          <div class="metric-head">
+            <span class="metric-label">Wind</span>
+            <!-- FIX: Lucide icon names are lowercase -->
+            <i data-lucide="wind" class="icon-md txt-teal-300"></i>
+          </div>
+          <p id="metricWind" class="metric-value">--km/h</p>
+          <span id="windStatus" class="metric-note txt-slate-300">Direction--</span>
+        </div>
+
+        <div class="metric-tile glass-card">
+          <div class="metric-head">
+            <span class="metric-label">UV Index</span>
+            <i data-lucide="sun-medium" class="icon-md txt-amber-300"></i>
+          </div>
+          <p id="metricUV" class="metric-value">--</p>
+          <span id="uvStatus" class="icon-md txt-amber-300">--</span>
+        </div>
+
+        <div class="metric-tile glass-card">
+          <div class="metric-head">
+            <span class="metric-label">Pressure</span>
+            <i data-lucide="gauge" class="icon-md txt-purple-300"></i>
+          </div>
+          <p id="metricPressure" class="metric-value">-- hPa</p>
+          <span id="pressureStatus" class="metric-note txt-slate-300">--</span>
+        </div>
+
+        <div class="metric-tile glass-card">
+          <div class="metric-head">
+            <span class="metric-label">Visibility</span>
+            <i data-lucide="eye" class="icon-md txt-indigo-300"></i>
+          </div>
+          <p id="metricVisibility" class="metric-value">-- km</p>
+          <span id="visibilityStatus" class="metric-note txt-slate-300">--</span>
+        </div>
+
+        <div class="metric-tile glass-card">
+          <div class="metric-head">
+            <span class="metric-label">Sun Cycle</span>
+            <i data-lucide="sunrise" class="icon-md txt-orange-300"></i>
+          </div>
+          <div class="sun-times">
+            <p>Rise: <strong id="sunriseTime">--</strong></p>
+            <p>Set: <strong id="sunsetTime">--</strong></p>
+          </div>
+        </div>
+      </div> <!-- FIX: closes .metric-grid -->
+    </section>
+
+    <!-- Right column: 10-day forecast -->
+    <section class="right-side">
+      <div class="forecast-card glass-card">
+        <div>
+          <div class="forecast-head">
+            <h3 class="forecast-title">
+              <i data-lucide="calendar" class="icon-lg"></i>
+              10-Day Forecast
+            </h3>
+            <span class="pannel-hint">Daily Outlook</span>
+          </div>
+          <div id="dailyforecastContainer" class="forecast-container no-scrollbar">
+            <div class="loading-text">Loading 10 days Weather Forecast...</div>
+          </div>
+        </div>
+        <div class="info-banner">
+          <div class="info-icon-box txt-cyan-300">
+            <i data-lucide="info" class="icon-lg1"></i>
+          </div>
+          <p class="info-text txt-slate-200">
+            Data sourced live via <strong class="txt-white">Open-Meteo API</strong>.
+            Weather conditions update automatically based on localized satellite telemetry.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer container-wide">
+    <p>© 2026 SkyPulse Weather • Crafted with HTML, CSS &amp; JavaScript</p>
+    <p>• Make By AmDaD</p>
+  </footer>
+
+  <!-- Toast notification -->
+  <div id="toast" class="toast glass-card">
+    <i data-lucide="bell" class="icon-md txt-cyan-300"></i>
+    <span id="toastMsg" class="toast-msg">Notification message</span>
+  </div>
+
+  <!-- JavaScript: order matters (config -> utils -> ui -> core -> features -> main) -->
+  <script src="js/config/constants.js"></script>
+  <script src="js/utils/weatherUtils.js"></script>
+  <script src="js/ui/toast.js"></script>
+  <script src="js/core/weatherCore.js"></script>
+  <script src="js/features/forecast.js"></script>
+  <script src="js/features/favorites.js"></script>
+  <script src="js/features/search.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

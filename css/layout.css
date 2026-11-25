@@ -1,0 +1,103 @@
+/* =============================================================
+   layout.css  |  Owner: Member 1 (UI design)
+   Page structure: header, favorites bar, dashboard grid,
+   metric grid and footer (all responsive).
+   ============================================================= */
+
+/* ---------- Header ---------- */
+.header {
+    width: 100%;
+    max-width: 80rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;            /* stacked on phones */
+    margin: 0 auto;
+    gap: 1rem;
+    padding: 1.5rem 1rem 0.5rem 1rem;
+}
+
+@media (min-width: 768px) {
+    .header { flex-direction: row; }   /* one row on tablets and desktops */
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+}
+
+/* ---------- Search area ---------- */
+.search-area {
+    position: relative;                /* anchor for the dropdown */
+    width: 100%;
+    flex: 1;
+    max-width: 550px;
+}
+
+.search-form {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1rem;
+    pointer-events: none;
+}
+
+/* ---------- Favorites bar ---------- */
+.favorite-bar {
+    width: 100%;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    overflow-x: auto;
+}
+
+/* ---------- Dashboard grid ---------- */
+.dashboard {
+    width: 100%;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 1rem;
+    display: grid;
+    gap: 1rem;
+}
+
+.left-side,
+.right-side {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border-radius: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+    .dashboard { grid-template-columns: repeat(12, 1fr); }
+    .left-side  { grid-column: span 7; }   /* 7/12 width */
+    .right-side { grid-column: span 5; }   /* 5/12 width */
+}
+
+/* ---------- Metric grid ---------- */
+.metric-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .metric-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+    text-align: center;
+    padding: 2rem 0;
+    color: #94a3b8;
+}
