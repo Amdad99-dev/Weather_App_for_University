@@ -66,8 +66,6 @@ skypulse-weather-dashboard/
 
 ## 👥 Team & Responsibilities
 
-| Member | Responsibility | Files |
-|---|---|---|
 | Member | Role | Files |
 |--------|------|-------|
 | Nowshin | UI design, HTML/CSS, testing, documentation | `index.html`, `css/*`, `js/main.js`, `js/ui/toast.js`, `README.md` |
